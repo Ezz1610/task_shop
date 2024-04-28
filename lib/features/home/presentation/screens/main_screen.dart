@@ -50,22 +50,7 @@ class _MainScreenState extends State<MainScreen> {
          authKey: _appPreferences.userDataInfo!.authKey,
          userId: _appPreferences.userDataInfo!.id),
      child: Scaffold(
-         appBar: AppBar(
-           title: const Text(
-             "Ezz Market",
-           ),
-           actions: [
-             IconButton(
-               onPressed: (){
-                 AppNavigator.navigateTo(context: context, screen: SearchScreen.id);
-               },
-               icon: const Icon(
-                 Icons.search,
-               ),
-             ),
-           ],
-         ),
-         body:_screens() ,
+         body:SafeArea(child: _screens() ,),
          bottomNavigationBar: _apiRequestBuilder()
      ),
    );

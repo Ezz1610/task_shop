@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:task/core/app_utils/app_colors.dart';
 import 'package:task/core/app_utils/app_extensions.dart';
 import 'package:task/core/app_utils/app_text_style.dart';
@@ -34,125 +36,122 @@ class MoreProductItem extends StatelessWidget{
               height:100,
               width: double.infinity
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisSize: MainAxisSize.max,
 
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 20.w,
-
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            moreProductDM.name!,
-                            overflow: TextOverflow.ellipsis,
-                              maxLines: 2,
-                              style:AppTextStyle.getBoldStyle(color: AppColors.black,fontSize: 13)
-                          ),
-                          Text(
-                            moreProductDM.shortDesc!,
-                            textAlign: TextAlign.right,
-                              maxLines: 3,
-
-                              overflow: TextOverflow.ellipsis,
-                              style: AppTextStyle.getRegularStyle(color: AppColors.grey,fontSize: 11)
-
-                          ),
-                        ],),
+              children: [
+                Expanded(
+                  flex:2,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        moreProductDM.name!,
+                        overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          style:AppTextStyle.getBoldStyle(color: AppColors.black,fontSize: 13)
+                      ),
+                      Text(
+                        moreProductDM.shortDesc!,
+                        textAlign: TextAlign.right,
+                          maxLines: 3,
+                  
+                          overflow: TextOverflow.ellipsis,
+                          style: AppTextStyle.getRegularStyle(color: AppColors.grey,fontSize: 11)
+                  
+                      ),
+                    ],),
+                ),
+                Expanded(
+                  flex: 4,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          moreProductDM.salePrice!,
+                          textDirection: TextDirection.ltr,
+                          style: AppTextStyle.getBoldStyle(color: AppColors.mainColor,fontSize: 10),
+                  
+                        ),
+                        Text(
+                          "درهم اماراتي",
+                          style: AppTextStyle.getBoldStyle(color: AppColors.mainColor,fontSize: 10),
+                  
+                        ),
+                  
+                      ],
                     ),
-                    const Spacer(),
-                    SizedBox(
-                      width: 23.w,
-                      // color: Colors.red,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                        Row(
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    if(moreProductDM.discount!="0")
+                      SizedBox(
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                  
                           children: [
-
                             Text(
-                              moreProductDM.salePrice!,
-                              textDirection: TextDirection.ltr,
-                              style: AppTextStyle.getBoldStyle(color: AppColors.mainColor,fontSize: 14),
-
+                              moreProductDM.listPrice!,
+                              textDirection: TextDirection.rtl,
+                              style: AppTextStyle.getRegularStyle(
+                                  color: AppColors.grey,
+                                  fontSize: 8,
+                                  decoration: TextDecoration.lineThrough),
+                  
+                  
                             ),
                             Text(
                               "درهم اماراتي",
                               style: AppTextStyle.getBoldStyle(color: AppColors.mainColor,fontSize: 9),
-
+                  
                             ),
-
                           ],
                         ),
-                        const SizedBox(
-                          width: 5,
+                      ),
+                    if(moreProductDM.discount!="0")
+                      Container(
+                        color: AppColors.black,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Text(
+                              "خصم",
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.white,
+                              ),
+                  
+                  
+                            ),
+                  
+                            Text(
+                             "%${ moreProductDM.discount!}",
+                              style: const TextStyle(
+                                fontSize: 14,
+                                color: Colors.white,
+                              ),
+                  
+                  
+                            ),
+                          ],
                         ),
-                        if(moreProductDM.discount!="0")
-                          SizedBox(
-                            child: Row(
-                              children: [
-                                Text(
-                                  moreProductDM.listPrice!,
-                                  textDirection: TextDirection.rtl,
-                                  style: AppTextStyle.getRegularStyle(
-                                      color: AppColors.grey,
-                                      fontSize: 12,
-                                      decoration: TextDecoration.lineThrough),
-
-
-                                ),
-                                Text(
-                                  "درهم اماراتي",
-                                  style: AppTextStyle.getBoldStyle(color: AppColors.mainColor,fontSize: 9),
-
-                                ),
-                              ],
-                            ),
-                          ),
-                        if(moreProductDM.discount!="0")
-                          Container(
-                            color: AppColors.black,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Text(
-                                  "خصم",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.white,
-                                  ),
-
-
-                                ),
-
-                                Text(
-                                 "%${ moreProductDM.discount!}",
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.white,
-                                  ),
-
-
-                                ),
-                              ],
-                            ),
-                          ),
-                      ],),
-                    ),
-
-
-
-                  ],
+                      ),
+                  ],),
                 ),
-              ),
-            ],
+
+
+
+              ],
+            ),
           ),
         ],
       ),

@@ -32,6 +32,7 @@ class UserLogInCubit extends Cubit<FlowState> {
     String deviceId = await getDeviceId();
     String platform = getPlatform();
     String token =await setupFirebaseMessaging();
+    dPrint("token is : ${token}");
     emit(LoadingState(stateRendererType: StateRendererType.fullScreenLoadingState));
     var req = UserLoginDataInfoRequest(
          email,
@@ -105,6 +106,8 @@ class UserLogInCubit extends Cubit<FlowState> {
   Future<String> setupFirebaseMessaging() async {
     await messaging.requestPermission();
     String? token = await messaging.getToken();
+    _appPreference.token=token??"";
+
     return token??"";
     print('FCM Token: $token');
     // Use the token in your authentication request

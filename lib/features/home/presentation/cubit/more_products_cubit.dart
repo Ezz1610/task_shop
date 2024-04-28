@@ -35,6 +35,7 @@ class MoreProductsCubit extends Cubit<FlowState> {
 
 
   Future<void> getMoreProductsData({
+    bool fromPagination=false,
     required authKey,
     required userId,
 
@@ -46,7 +47,12 @@ class MoreProductsCubit extends Cubit<FlowState> {
     String itemCount=getItemCount(_appPreference.itemCountValue);
     String limit="30";
     String searchWith="home_types";
-    emit(LoadingState(stateRendererType: StateRendererType.fullScreenLoadingState));
+    if(fromPagination){
+      emit(PaginationLoadingState("PaginationLoadingState"));
+    }else{
+      emit(LoadingState(stateRendererType: StateRendererType.fullScreenLoadingState));
+
+    }
     var req = MoreProductsDataRequest(
       authKey!,
       userId!,
@@ -68,17 +74,23 @@ class MoreProductsCubit extends Cubit<FlowState> {
             (data) {
           moreProductsDM = data!;
           moreProductsDM.map((e) => products.add(e)).toSet();
-          _appPreference.itemCount=_appPreference.itemCountValue+30;
+          if(data.isNotEmpty && data.length<29){
+            _appPreference.itemCount=_appPreference.itemCountValue+30;
+
+          }
           dPrint("itemCountNumber after is ${_appPreference.itemCountValue}");
           dPrint("data isssssssssssssliders${moreProductsDM.length.toString()}");
 
           _appPreference.remove(itemCount);
-          if (moreProductsDM.isNotEmpty) {
+          if (moreProductsDM.isNotEmpty && fromPagination==false) {
             emit(SuccessState(
               message: 'success',
               stateRendererType: StateRendererType.contentState,
             ));
-          } else {
+          } else if(fromPagination==true){
+            emit(PaginationSuccessState('fromPagination',));
+          }
+          else {
             emit(EmptyState('لا يوجد منتجات '));
           }
           // print(data);

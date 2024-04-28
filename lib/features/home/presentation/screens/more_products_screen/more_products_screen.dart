@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task/app.dart';
 import 'package:task/core/app_business_logic/state_renderer/request_builder.dart';
+import 'package:task/core/app_business_logic/state_renderer/state_renderer.dart';
 import 'package:task/core/app_business_logic/state_renderer/state_renderer_impl.dart';
 import 'package:task/core/app_utils/app_colors.dart';
 import 'package:task/core/app_utils/app_navigator.dart';
@@ -50,20 +51,45 @@ class _MoreProductScreenState extends State<MoreProductScreen> {
       ),
       child: Scaffold(
           body:SafeArea(child: _apiRequestBuilder()) ,
+          bottomNavigationBar: SizedBox(
+            height: 60,
+            child: RequestBuilder<MoreProductsCubit>(
+              contentBuilder: (context,cubit){
+                if(cubit.state is PaginationLoadingState){
+                  dPrint("pagiiiiiiiiiiiiiiii111111111");
+                  return Center(child: CircularProgressIndicator(color: AppColors.mainColor,));
+                }else{
+                  dPrint("pagiiiiiiiiiiiiiiii22222222");
+
+                  return SizedBox.shrink();
+                }
+
+              },
+              retry: (context , cubit ) {  },
+            ),
+          ),
       ),
     );
   }
   _apiRequestBuilder() {
     return RequestBuilder<MoreProductsCubit>(
       contentBuilder: (context, cubit) {
-       return BuildGridMoreProducts(moreProductsDM: cubit.moreProductsDM,);
+       return NotificationListener<ScrollNotification>(
+            onNotification: (notification){
+              if(notification.metrics.pixels==notification.metrics.maxScrollExtent&&
+              notification is ScrollUpdateNotification
+              ){
+                cubit.getMoreProductsData(
+                    fromPagination: true,
+                    authKey: _appPreferences.userDataInfo!.authKey,
+                    userId: _appPreferences.userDataInfo!.id);
+              }
+              return true;
+            },
+           child: BuildGridMoreProducts(moreProductsDM: cubit.products,));
       },
       retry: (context, cubit) {},
       listener: (context, cubit) {
-        if (cubit.state is SuccessState) {
-          dPrint("state is SuccessState");
-
-        }
       },
     );
   }

@@ -78,7 +78,7 @@ class ProductItem extends StatelessWidget{
                             Text(
                               productDM.salePrice!,
                               textDirection: TextDirection.ltr,
-                              style: AppTextStyle.getBoldStyle(color: AppColors.mainColor,fontSize: 14),
+                              style: AppTextStyle.getBoldStyle(color: AppColors.mainColor,fontSize: 12),
 
                             ),
                             Text(
@@ -123,7 +123,7 @@ class ProductItem extends StatelessWidget{
                                 const Text(
                                   "خصم",
                                   style: TextStyle(
-                                    fontSize: 14,
+                                    fontSize: 12,
                                     color: Colors.white,
                                   ),
 
@@ -133,7 +133,7 @@ class ProductItem extends StatelessWidget{
                                 Text(
                                  "%${ productDM.discount!}",
                                   style: const TextStyle(
-                                    fontSize: 14,
+                                    fontSize: 12,
                                     color: Colors.white,
                                   ),
 

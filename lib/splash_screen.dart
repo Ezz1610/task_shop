@@ -60,7 +60,7 @@ class _SplashScreenState extends State<SplashScreen> {
               Center(
                 child: Image.asset(
                   AppImageAssets.logo,
-                  width: 200,
+
                 ),
               ),
               SizedBox(

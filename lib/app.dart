@@ -45,8 +45,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return Sizer(builder: (context, orientation, deviceType) {
       return BlocBuilder<AppCubit, AppState>(
-        buildWhen: (previousState, currentState) =>
-        previousState != currentState,
+        buildWhen: (previousState, currentState) => previousState != currentState,
         builder: (context, state) {
           App.appCubit = context.watch<AppCubit>();
           return MaterialApp(
@@ -66,6 +65,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
             theme: App.appCubit.theme,
             // home: const StartServerScreen(),
             initialRoute: SplashScreen.id,
+
             debugShowCheckedModeBanner: false,
             onGenerateRoute: AppRoutes.onGenerateRoute,
           );

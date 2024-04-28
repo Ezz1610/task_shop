@@ -19,6 +19,7 @@ class BuildGridMoreProducts extends StatelessWidget{
     dPrint("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa${moreProductsDM.length}");
     // TODO: implement build
     return  SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
