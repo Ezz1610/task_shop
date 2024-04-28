@@ -4,7 +4,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:sizer/sizer.dart';
 import 'package:task/core/app_business_logic/state_renderer/request_builder.dart';
+import 'package:task/core/app_utils/app_assets.dart';
 import 'package:task/core/app_utils/app_colors.dart';
 import 'package:task/core/app_utils/media_query_values.dart';
 import 'package:task/core/app_widgets/custom_network_image.dart';
@@ -35,39 +37,43 @@ class HomeScreen extends StatelessWidget {
           child: Column(children: [
             Padding(
               padding: const EdgeInsets.all(10.0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20.0),
-                        border: Border.all(color: Colors.grey),
-                      ),
-                      child: const Row(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(left: 8.0, right: 4.0),
-                            child: Icon(Icons.search),
-                          ),
-                          Expanded(
-                            child: TextField(
-                              decoration: InputDecoration(
-                                hintText: 'Search',
-                                border: InputBorder.none,
+              child: Directionality(
+                textDirection: TextDirection.rtl,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20.0),
+                          border: Border.all(color: Colors.grey),
+                        ),
+                        child: const Row(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(left: 8.0, right: 4.0),
+                              child: Icon(Icons.search),
+                            ),
+                            Expanded(
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  hintText: 'Search',
+                                  border: InputBorder.none,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.send),
-                    onPressed: () {
-                      // Perform search or submit action
-                    },
-                  ),
-                ],
+
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10.0),
+                      child: Image(
+                          width: 30,
+                          height: 30,
+                          image: AssetImage(AppImageAssets.shar)),
+                    ),                ],
+                ),
               ),
             ),
             Padding(

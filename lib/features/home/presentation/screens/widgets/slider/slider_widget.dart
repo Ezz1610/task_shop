@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:task/core/app_widgets/custom_network_image.dart';
 import 'package:task/features/home/domain/model/home_model/home_model.dart';
 
 class SliderWidget extends StatelessWidget{
@@ -15,12 +16,12 @@ class SliderWidget extends StatelessWidget{
         children: [
           CarouselSlider(
             items:homeDM.sliders?.map((e) =>
-                Image(
-                  image: NetworkImage(e.image!),
-
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                )).toList(),
+                CustomNetworkImage(
+                    imageUrl: e.image!,
+                    height:100,
+                    width: double.infinity
+                ),
+            ).toList(),
 
             options: CarouselOptions(
               viewportFraction: 1,

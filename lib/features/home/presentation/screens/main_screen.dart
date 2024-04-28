@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task/app.dart';
 import 'package:task/core/app_business_logic/state_renderer/request_builder.dart';
 import 'package:task/core/app_business_logic/state_renderer/state_renderer_impl.dart';
+import 'package:task/core/app_utils/app_assets.dart';
 import 'package:task/core/app_utils/app_colors.dart';
 import 'package:task/core/app_utils/app_navigator.dart';
 import 'package:task/core/app_utils/app_prefs.dart';
@@ -74,25 +75,44 @@ class _MainScreenState extends State<MainScreen> {
       contentBuilder: (context, cubit) {
 
         dPrint("cubit.currentIndex is : ${cubit.currentIndex}");
-        return BottomNavigationBar(
-          currentIndex: cubit.currentIndex,
-          fixedColor: AppColors.mainColor,
-          unselectedItemColor:AppColors.grey,
-          unselectedFontSize:14,
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          items:
-          navBarItems(
-            icon1: Icons.home,
-            icon2: Icons.apps_outlined,
-            icon3: Icons.favorite,
-            icon4: Icons.settings,
+        return Directionality(
+          textDirection: TextDirection.ltr,
+          child: BottomNavigationBar(
+            currentIndex: cubit.currentIndex,
+            fixedColor: AppColors.mainColor,
+            unselectedItemColor:AppColors.grey,
+            unselectedFontSize:14,
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
+            items:
+            navBarItems(
+              icon1: Image(
+                  width: 30,
+                  height: 30,
+                  image: AssetImage(AppImageAssets.home)),
+              icon2: Image(
+                  width: 30,
+                  height: 30,
+                  image: AssetImage(AppImageAssets.bottom1)),
+              icon3: Image(
+              width: 30,
+              height: 30,
+                image: AssetImage(AppImageAssets.cart)),
+              icon4: Image(
+              width: 30,
+              height: 30,
+          image: AssetImage(AppImageAssets.fav)),
+              icon5: Image(
+              width: 30,
+              height: 30,
+          image: AssetImage(AppImageAssets.account)),
 
+            ),
+
+            onTap: (index){
+              cubit.changeIndex(index);
+            },
           ),
-
-          onTap: (index){
-            cubit.changeIndex(index);
-          },
         );
       },
       retry: (context, cubit) {},

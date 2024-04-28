@@ -38,8 +38,7 @@ import 'package:task/features/home/data/mappers/sliders_mapper/slider_mapper.dar
 import 'package:task/features/home/data/mappers/new_products_mapper/new_product_mapper.dart' as _23;
 import 'package:task/features/home/data/mappers/selected_products_mapper/selected_product_mapper.dart' as _24;
 import 'package:task/features/home/data/mappers/categories_mapper/category_mapper.dart' as _25;
-import 'package:task/features/home/data/mappers/more_products_mapper/more_products_mapper.dart' as _26;
-import 'package:task/features/home/data/mappers/more_product_mapper/more_product_mapper.dart' as _27;
+import 'package:task/features/home/data/mappers/more_product_mapper/more_product_mapper.dart'as _26;
 import 'package:task/features/home/presentation/cubit/more_products_cubit.dart'as _28;
 import 'package:task/features/home/domain/usecase/more_products_usecase.dart'as _29;
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -56,7 +55,9 @@ Future<_1.GetIt> $initGetIt(
   final dIModule = _$DIModule();
   final dioModule = _$DioModule();
   await gh.factoryAsync<_5.Dio>(
-        () => dioModule.getDio(),
+        () => dioModule.getDio(
+          gh<_9.AppPreferences>(),
+        ),
     preResolve: true,
   );
 
@@ -95,7 +96,7 @@ gh.factory<_11.HomeRepository>(() => _17.HomeRepositoryImpl(
 gh<_13.SafeApi>(),
 gh<_18.HomeRemoteDataSource>(),
 gh<_20.HomeMapper>(),
-gh<_26.MoreProductsMapper>(),
+gh<_26.MoreProductMapper>(),
 
 
 ));
@@ -117,12 +118,10 @@ gh<_26.MoreProductsMapper>(),
   ));
  gh.factory<_25.CategoryMapper>(() =>_25.CategoryMapper(
   ));
- gh.factory<_26.MoreProductsMapper>(() =>_26.MoreProductsMapper(
-   gh<_27.MoreProductMapper>(),
+ gh.factory<_26.MoreProductMapper>(() =>_26.MoreProductMapper(
 
  ));
- gh.factory<_27.MoreProductMapper>(() =>_27.MoreProductMapper(
-  ));
+
 
   // final ProductMapper _productMapper;
   // final SliderMapper _sliderMapper;

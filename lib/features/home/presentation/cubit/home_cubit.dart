@@ -6,6 +6,7 @@ import 'package:task/core/app_utils/media_query_values.dart';
 import 'package:task/core/dependency_injection/dependency_injection.dart';
 import 'package:task/features/home/data/request/home_data_request.dart';
 import 'package:task/features/home/domain/model/home_model/home_model.dart';
+import 'package:task/features/home/presentation/screens/account/account_screen.dart';
 import 'package:task/features/home/presentation/screens/categories/categories_screen.dart';
 import 'package:task/features/home/presentation/screens/favorite/favorite_screen.dart';
 import 'package:task/features/home/presentation/screens/home/home_screen.dart';
@@ -68,9 +69,10 @@ class HomeCubit extends Cubit<FlowState> {
   }
   List<Widget>screens=[
      HomeScreen(),
-    CategoriesScreen(),
+    const SettingsScreen(),
+    CartScreen(),
     FavoritScreen(),
-    SettingsScreen()
+    const AccountScreen()
 
   ];
 

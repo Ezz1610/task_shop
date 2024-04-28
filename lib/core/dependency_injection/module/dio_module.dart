@@ -21,12 +21,12 @@ const String DEFAULT_LANGUAGE = "language";
 abstract class DioModule {
   @preResolve
   @factoryMethod
-  Future<Dio> getDio() async {
+  Future<Dio> getDio(AppPreferences _appPreferences) async {
     Dio dio = Dio();
 
-    // String language = await _appPreferences.getAppLanguage();
+    String language =  _appPreferences.appLanguage;
 
-    dio.updateHeader();
+    dio.updateHeader(language);
 
     if (!kReleaseMode) {
       // its debug mode so print app logs
@@ -47,12 +47,12 @@ abstract class DioModule {
 //dio.options.headers['Authorization'] = 'Bearer $token';
 extension DioHeader on Dio {
 
-  void updateHeader() {
+  void updateHeader(String language) {
     Map<String, String> headers = {
       CONTENT_TYPE: APPLICATION_JSON,
       ACCEPT: APPLICATION_JSON,
       // + _preferences.getData(AppPreferences.userToken, ""),
-      ACCEPT_Language: LANGUAGE,
+      ACCEPT_Language: language,
       // _preferences.getData(AppPreferences.lang, AppStrings.defaultLanguage),
       // DEFAULT_LANGUAGE: language
     };

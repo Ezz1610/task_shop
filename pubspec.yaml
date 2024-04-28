@@ -86,39 +86,22 @@ flutter:
   generate: true
   uses-material-design: true
   assets:
-    - assets/ic_launcher.png
-    - assets/json/
-    - assets/images/
-    - assets/images/fawtarra_logo.png
-    - assets/images/close.png
-    - assets/images/delete_keyboard.png
-    - assets/images/back.png
-    - assets/images/edit.png
-    - assets/images/delete.png
-    - assets/images/fremOrange.png
-    - assets/images/backWhiteColor.png
-    - assets/images/top_bar_icons/close.png
-    - assets/images/top_bar_icons/discount.png
-    - assets/images/top_bar_icons/order.png
-    - assets/images/top_bar_icons/main.png
-    - assets/images/top_bar_icons/new.png
-    - assets/images/top_bar_icons/notes.png
-    - assets/images/top_bar_icons/printer.png
-    - assets/images/top_bar_icons/tables.png
-    - assets/images/top_bar_icons/plus.png
-    - assets/images/top_bar_icons/minus.png
-    - assets/images/services_icons/delivery.png
-    - assets/images/services_icons/local.png
-    - assets/images/services_icons/takeaway.png
-    - assets/images/drawer/cashier_summary.png
-    - assets/images/drawer/close_cashier.png
-    - assets/images/drawer/close_day.png
-    - assets/images/drawer/day_summary.png
-    - assets/images/drawer/devices.png
-    - assets/images/drawer/lang.png
-    - assets/images/drawer/logout.png
-    - assets/images/drawer/restartServer.png
-    - assets/images/drawer/sync.png
+    - assets/json/loading.json
+    - assets/images/bottom_bar/account.png
+    - assets/images/bottom_bar/bottom1.png
+    - assets/images/bottom_bar/cart.png
+    - assets/images/bottom_bar/fav.png
+    - assets/images/bottom_bar/home.png
+    - assets/images/home/category/group1.png
+    - assets/images/home/category/group2.png
+    - assets/images/home/category/group3.png
+    - assets/images/home/category/group4.png
+    - assets/images/home/shar.png
+    - assets/images/login/facebook.png
+    - assets/images/login/google.png
+    - assets/images/logo.png
+    - assets/images/def_img.png
+
   fonts:
     - family: Cairo
       fonts:
@@ -162,7 +145,7 @@ flutter_native_splash:
   ios_content_mode: center
   android_screen_orientation: sensorLandscape
   ios_screen_orientation: sensorLandscape
-  image: assets/images/fawtarra_logo.png
+  image: assets/images/logo.png
   android_12:
     image: assets/app_icon_12.png
     color: "#EDECEC"

@@ -8,8 +8,9 @@ import 'package:task/core/app_utils/app_navigator.dart';
 import 'package:task/splash_screen.dart';
 
 
-class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({super.key});
+class AccountScreen extends StatelessWidget {
+  const AccountScreen({super.key});
+
 
 
   @override
@@ -23,12 +24,9 @@ class SettingsScreen extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(
-              Icons.language
-          ),
           Text(
             translator(
-                arabicWord: 'العربية', englishWord: 'English'),
+                arabicWord: 'حسابك', englishWord: 'Account'),
             style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,

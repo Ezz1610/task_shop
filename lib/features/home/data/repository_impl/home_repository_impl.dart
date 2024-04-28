@@ -2,12 +2,14 @@
 
 import 'package:dartz/dartz.dart';
 import 'package:task/features/home/data/mappers/home_mapper/home_data_mapper.dart';
-import 'package:task/features/home/data/mappers/more_products_mapper/more_products_mapper.dart';
+import 'package:task/features/home/data/mappers/more_product_mapper/more_product_mapper.dart';
 import 'package:task/features/home/data/request/home_data_request.dart';
 import 'package:task/features/home/data/request/more_products_data_request.dart';
 import 'package:task/features/home/data/responce/home_entity/home_entity.dart';
+import 'package:task/features/home/data/responce/more_products_entity/more_product_entity.dart';
 import 'package:task/features/home/data/responce/more_products_entity/more_products_entity.dart';
 import 'package:task/features/home/domain/model/home_model/home_model.dart';
+import 'package:task/features/home/domain/model/more_products_model/more_product_model.dart';
 import 'package:task/features/home/domain/model/more_products_model/more_products_model.dart';
 import '../../../../core/app_utils/media_query_values.dart';
 import '../../../../core/data/network/error_handler.dart';
@@ -23,13 +25,13 @@ class HomeRepositoryImpl implements HomeRepository {
   final HomeRemoteDataSource remoteDataSource;
   // final HomeLocalDataSource localDataSourceDataSource;
   final HomeMapper _homeMapper;
-  final MoreProductsMapper _moreProductsMapper;
+  final MoreProductMapper _moreProductMapper;
 
   HomeRepositoryImpl(this.api,
       this.remoteDataSource,
       // this.localDataSourceDataSource,
       this._homeMapper,
-      this._moreProductsMapper,
+      this._moreProductMapper,
       );
 
 
@@ -50,17 +52,17 @@ class HomeRepositoryImpl implements HomeRepository {
         });
   }
   @override
-  Future<Either<Failure, MoreProductsDM?>> getMoreProductsData(
+  Future<Either<Failure, List<MoreProductDM>?>> getMoreProductsData(
       {required MoreProductsDataRequest request})async {
     dPrint("00000000000000000${remoteDataSource.getMoreProductsData(request: request)}");
     return await api.call(
         apiCall: remoteDataSource.getMoreProductsData(request: request),
-        onMap: (BaseResponse<MoreProductsEntity> response) {
+        onMap: (BaseResponse<List<MoreProductEntity>> response) {
           dPrint("response111111111111");
-          dPrint("response2222222222${response.data!.toJson()}");
+          dPrint("response2222222222${response.data!}");
 
           /// map data for return model
-          var data = _moreProductsMapper.mapFromEntity(response.data );
+          var data = _moreProductMapper.mapFromEntityList(response.data??[] );
           return data;
         });
   }

@@ -58,7 +58,7 @@ class _HomeServiceClient implements HomeServiceClient {
   }
 
   @override
-  Future<BaseResponse<MoreProductsEntity>> getMoreProductsData(
+  Future<BaseResponse<List<MoreProductEntity>>> getMoreProductsData(
     String authKey,
     String userId,
     String searchWith,
@@ -78,7 +78,7 @@ class _HomeServiceClient implements HomeServiceClient {
       'limit': limit,
     };
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<BaseResponse<MoreProductsEntity>>(Options(
+        _setStreamType<BaseResponse<List<MoreProductEntity>>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -95,9 +95,14 @@ class _HomeServiceClient implements HomeServiceClient {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = BaseResponse<MoreProductsEntity>.fromJson(
+    final value = BaseResponse<List<MoreProductEntity>>.fromJson(
       _result.data!,
-      (json) => MoreProductsEntity.fromJson(json as Map<String, dynamic>),
+      (json) => json is List<dynamic>
+          ? json
+              .map<MoreProductEntity>(
+                  (i) => MoreProductEntity.fromJson(i as Map<String, dynamic>))
+              .toList()
+          : List.empty(),
     );
     return value;
   }

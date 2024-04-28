@@ -4,6 +4,7 @@ import 'package:task/app.dart';
 import 'package:task/core/app_utils/app_colors.dart';
 import 'package:task/core/app_utils/app_navigator.dart';
 import 'package:task/core/app_utils/app_prefs.dart';
+import 'package:task/core/app_utils/app_text_style.dart';
 import 'package:task/core/app_utils/media_query_values.dart';
 import 'package:task/core/components/components.dart';
 import 'package:task/core/dependency_injection/dependency_injection.dart';
@@ -27,30 +28,36 @@ class BuildGridProduct extends StatelessWidget{
         myDivider(),
          Padding(
           padding: const EdgeInsets.all(10.0),
-          child: Row(
-            children: [
-              Text(
-                App.tr.products,
-                style: const TextStyle(
-                  fontSize: 24,
-                ),
-              ),
-              InkWell(
-                onTap: (){
-               getIt<MoreProductsCubit>().getMoreProductsData(
-                        authKey: getIt<AppPreferences>().userDataInfo!.authKey,
-                        userId: getIt<AppPreferences>().userDataInfo!.id
-
-                  );
-                  // AppNavigator.navigateTo(context: context, screen: MoreProductScreen.id);
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: AppColors.mainColor
+          child: Directionality(
+            
+            textDirection: TextDirection.rtl,
+            child: Row(
+              children: [
+                Text(
+                  App.tr.products,
+                  style: const TextStyle(
+                    fontSize: 24,
                   ),
-                  child: Text(App.tr.more),),
-              )
-            ],
+                ),
+                const Spacer(),
+                InkWell(
+                  onTap: (){
+                    AppNavigator.navigateTo(context: context, screen: MoreProductScreen.id);
+                  },
+                  child: Container(
+                    width: 80,
+                    height: 40,
+                    decoration: BoxDecoration(
+                        color: AppColors.mainColor,
+                        borderRadius: BorderRadius.circular(20)
+                    ),
+                    child: Center(
+                        child: Text(App.tr.more,
+                          style: AppTextStyle.getBoldStyle(
+                              color: AppColors.white,fontSize: 18),)),),
+                )
+              ],
+            ),
           ),
         ),
         Container(

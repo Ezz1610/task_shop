@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 import 'package:task/app.dart';
+import 'package:task/core/app_utils/app_assets.dart';
+import 'package:task/core/app_utils/app_text_style.dart';
 import 'package:task/core/app_utils/app_validation.dart';
 import 'package:task/core/app_utils/media_query_values.dart';
 import 'package:task/features/home/presentation/cubit/home_cubit.dart';
@@ -35,9 +37,6 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
        TextEditingController(text: kDebugMode?"123456":"");
 
   var formKey = GlobalKey<FormState>();
-
-  final bool _isFocusedUserEmail = false;
-  final bool _isFocusedPassword = false;
 
   @override
   void initState() {
@@ -78,17 +77,22 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
 
   buildScreenContent(UserLogInCubit cubit) {
     return Padding(
-      padding:  const EdgeInsets.all(20),
+      padding:   EdgeInsets.all(20),
       child: Form(
         key: formKey,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            const Image(
+                width: 80,
+                height: 80,
+                image: AssetImage(AppImageAssets.logo)),
+            const SizedBox(
+              height: 10,
+            ),
             Text(
-              "LOGIN",
-              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                color: Colors.black,
-              ),
+              "مرحباً بك",
+              style: AppTextStyle.getBoldStyle(color: AppColors.black,fontSize: 22)
             ),
             const SizedBox(
               height: 20,
@@ -140,8 +144,54 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
                     dPrint(passwordController.text);
                   }
                 }),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(
+                  onPressed: (){},
+                  child:  Text(
+                    'نسيت كلمة المرور',
+                    style: AppTextStyle.getRegularStyle(color: AppColors.grey),
+                  ),
+                ),
+              ],
+            ),
 
-
+            const SizedBox(
+              height: 15,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  'ليس لديك حساب؟ ',
+                ),
+                TextButton(
+                  onPressed: (){},
+                  child: const Text(
+                    'سجل الأن',
+                  ),
+                ),
+              ],
+            ),
+           //  Column(children: [
+           //   Text("Or Sing in With"),
+           //   // Row(children: [
+           //   //   // Image(
+           //   //   //     width: 30,
+           //   //   //     height: 30,
+           //   //   //     image:  const AssetImage(AppImageAssets.google)),
+           //   //   // Image(
+           //   //   //     width: 30,
+           //   //   //     height: 30,
+           //   //   //     image: const AssetImage(AppImageAssets.apple)),
+           //   //   // Image(
+           //   //   //
+           //   //   //     width: 30,
+           //   //   //     height: 30,
+           //   //   //     image: const AssetImage(AppImageAssets.facebook)),
+           //   // ],)
+           // ],)
           ],
         ),
       ),

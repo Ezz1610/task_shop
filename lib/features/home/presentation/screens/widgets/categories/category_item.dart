@@ -14,10 +14,11 @@ class CategoryItem extends StatelessWidget{
     // TODO: implement build
     return Column(
       children: [
-        Image(
-          image: NetworkImage("${categoryDM.icon}"),
-          width: 100,
-          height:70 ,
+        CustomNetworkImage(
+            imageUrl: "${categoryDM.icon}",
+          width: 80,
+          height:60 ,
+
         ),
         Text(
           "${categoryDM.categoryName}",

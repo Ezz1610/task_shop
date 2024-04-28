@@ -7,15 +7,15 @@ import '../app_utils/app_fonts.dart';
 //List<BottomNavigationBarItem> ?items;
 
 List<BottomNavigationBarItem> navBarItems({
-  IconData? icon1,
+  Image? icon1,
   String? labelData1,
-  IconData? icon2,
+  Image? icon2,
   String? labelData2,
-  IconData? icon3,
+  Image? icon3,
   String? labelData3,
-  IconData? icon4,
+  Image? icon4,
   String? labelData4,
-  IconData? icon5,
+  Image? icon5,
   String? labelData5,
   List<BottomNavigationBarItem>? items,
 }) {
@@ -23,31 +23,27 @@ List<BottomNavigationBarItem> navBarItems({
       items = [
     if (icon1 != null)
       BottomNavigationBarItem(
-        icon: Icon(
-          icon1,
-        ),
+        icon:icon1,
         label: labelData1??"",
       ),
     if (icon2 != null)
       BottomNavigationBarItem(
-        icon: Icon(
-          icon2,
-        ),
+        icon: icon2,
         label: labelData2??"",
       ),
     if (icon3 != null)
       BottomNavigationBarItem(
-        icon: Icon(icon3),
+        icon: icon3,
         label: labelData3??"",
       ),
     if (icon4 != null)
       BottomNavigationBarItem(
-        icon: Icon(icon4),
+        icon: icon4,
         label: labelData4??"",
       ),
     if (icon5 != null)
       BottomNavigationBarItem(
-        icon: Icon(icon5),
+        icon: icon5,
         label: labelData5??"",
       ),
   ]);

@@ -26,6 +26,7 @@ class AppPreferences {
 //=========================================================================//
   static const String _isDarkMode = 'isDarkMode';
   static const String _lang = 'lang';
+  static const String _itemCount = 'itemCount';
   final String _isLogin = 'isLogin';
   final String _token = 'token';
 
@@ -54,8 +55,12 @@ class AppPreferences {
   set appLanguage(String language) {
     _putData(_lang, language);
   }
+  set itemCount(int itemCount) {
+    _putData(_itemCount, itemCount);
+  }
 
   String get appLanguage => _getData(_lang, AppStrings.arLanguage);
+  int get itemCountValue => _getData(_itemCount, 0);
 
 
 

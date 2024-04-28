@@ -59,7 +59,7 @@ class _SplashScreenState extends State<SplashScreen> {
             children: [
               Center(
                 child: Image.asset(
-                  AppImageAssets.fawtarraLogo,
+                  AppImageAssets.logo,
                   width: 200,
                 ),
               ),

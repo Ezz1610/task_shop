@@ -49,14 +49,14 @@ class _MoreProductScreenState extends State<MoreProductScreen> {
           userId: _appPreferences.userDataInfo!.id
       ),
       child: Scaffold(
-          body:_apiRequestBuilder() ,
+          body:SafeArea(child: _apiRequestBuilder()) ,
       ),
     );
   }
   _apiRequestBuilder() {
     return RequestBuilder<MoreProductsCubit>(
       contentBuilder: (context, cubit) {
-       return BuildGridMoreProducts(moreProductsDM: cubit.moreProductsDM!,);
+       return BuildGridMoreProducts(moreProductsDM: cubit.moreProductsDM,);
       },
       retry: (context, cubit) {},
       listener: (context, cubit) {

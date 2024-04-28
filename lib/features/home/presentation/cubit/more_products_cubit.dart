@@ -30,7 +30,7 @@ class MoreProductsCubit extends Cubit<FlowState> {
 
   static MoreProductsCubit get(BuildContext context) => context.read<MoreProductsCubit>();
 
-  MoreProductsDM? moreProductsDM;
+  List<MoreProductDM>moreProductsDM=[];
   List<MoreProductDM>products=[];
 
 
@@ -40,51 +40,51 @@ class MoreProductsCubit extends Cubit<FlowState> {
 
   })async {
     String homeTypes="new";
-    int itemCountNumber=0;
     String? authKey = getIt<AppPreferences>().userDataInfo!.authKey;
     String? userId = getIt<AppPreferences>().userDataInfo!.id;
-    String itemCount=getItemCount(itemCountNumber);
+    dPrint("itemCountNumber is before : ${_appPreference.itemCountValue}");
+    String itemCount=getItemCount(_appPreference.itemCountValue);
     String limit="30";
     String searchWith="home_types";
     emit(LoadingState(stateRendererType: StateRendererType.fullScreenLoadingState));
     var req = MoreProductsDataRequest(
-        authKey!,
-        userId!,
+      authKey!,
+      userId!,
       searchWith,
       homeTypes,
-        itemCount,
+      itemCount,
       limit,
-
-
-
 
     );
     getIt<Dio>().options.headers={  "Accept-Language":"en",
       "content-type": "application/json",
-      "accept": "application/json",};  //I/flutter (15149): {auth_key: xx508xx63817x7525x74g004x30706542858349x5x78f5xx34xnh468,
-    // user_id: 16, search_with: home_types, home_types: 30, item_count: new, limit: 0}
-    dPrint("authKey is : ${req.authKey.toString()}");
-    dPrint("userId is : ${req.userId.toString()}");
+      "accept": "application/json",};
+
     _moreProductsUseCase.execute(req).then((value) => value.fold(
             (failure) {
           dPrint("failure reqqqqqqqqqq is : ${failure.toString()}");
-          emit(ErrorState(StateRendererType.toastErrorState, failure.message));
-        },
+          emit(ErrorState(
+              StateRendererType.fullScreenErrorState, failure.message));        },
             (data) {
-          moreProductsDM = data;
-          moreProductsDM!.moreProducts?.map((e) => products.add(e)).toSet();
-          itemCountNumber+=30;
-          dPrint("data isssssssssssssliders${moreProductsDM!.moreProducts!.length.toString()}");
+          moreProductsDM = data!;
+          moreProductsDM.map((e) => products.add(e)).toSet();
+          _appPreference.itemCount=_appPreference.itemCountValue+30;
+          dPrint("itemCountNumber after is ${_appPreference.itemCountValue}");
+          dPrint("data isssssssssssssliders${moreProductsDM.length.toString()}");
 
-
-          emit(SuccessState(
-            message: 'تم حفظ البيانات بنجاح',
-            stateRendererType: StateRendererType.contentState,
-          ));
+          _appPreference.remove(itemCount);
+          if (moreProductsDM.isNotEmpty) {
+            emit(SuccessState(
+              message: 'success',
+              stateRendererType: StateRendererType.contentState,
+            ));
+          } else {
+            emit(EmptyState('لا يوجد منتجات '));
+          }
           // print(data);
         }));
   }
-String getItemCount(int itemCount){
-    return "$itemCount";
-}
+  String getItemCount(int item){
+    return "$item";
+  }
 }
