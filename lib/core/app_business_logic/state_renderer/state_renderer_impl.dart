@@ -111,6 +111,20 @@ class PaginationLoadingState extends FlowState {
   @override
   List<Object?> get props => [message];
 }
+class GetMoreProductLoadingState extends FlowState {
+  String message;
+
+  GetMoreProductLoadingState(this.message);
+
+  @override
+  String getMessage() => message;
+
+  @override
+  StateRendererType getStateRendererType() => StateRendererType.fullScreenEmptyState;
+
+  @override
+  List<Object?> get props => [message];
+}
 
 // success state
 @immutable

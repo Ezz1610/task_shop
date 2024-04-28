@@ -50,7 +50,7 @@ class MoreProductsCubit extends Cubit<FlowState> {
     if(fromPagination){
       emit(PaginationLoadingState("PaginationLoadingState"));
     }else{
-      emit(LoadingState(stateRendererType: StateRendererType.fullScreenLoadingState));
+      emit(GetMoreProductLoadingState("loading"));
 
     }
     var req = MoreProductsDataRequest(
@@ -70,7 +70,8 @@ class MoreProductsCubit extends Cubit<FlowState> {
             (failure) {
           dPrint("failure reqqqqqqqqqq is : ${failure.toString()}");
           emit(ErrorState(
-              StateRendererType.fullScreenErrorState, failure.message));        },
+              StateRendererType.toastErrorState, failure.message));
+          },
             (data) {
           moreProductsDM = data!;
           moreProductsDM.map((e) => products.add(e)).toSet();

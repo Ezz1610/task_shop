@@ -44,7 +44,7 @@ class UserLogInCubit extends Cubit<FlowState> {
     );
     _userAuthUseCase.execute(req).then((value) => value.fold(
             (failure) {
-          dPrint("failure reqqqqqqqqqq is : ${failure.toString()}");
+          dPrint("failure reqqqqqqqqqq is : ${failure.message.toString()}");
           emit(ErrorState(StateRendererType.toastErrorState, failure.message));
         }, (data) {
       userLoginDataDM = data;
@@ -109,50 +109,8 @@ class UserLogInCubit extends Cubit<FlowState> {
     _appPreference.token=token??"";
 
     return token??"";
-    print('FCM Token: $token');
-    // Use the token in your authentication request
   }
 
 
-
-  // initialFunction()async{
-  //   await Firebase.initializeApp(
-  //     options: DefaultFirebaseOptions.currentPlatform,
-  //   );
-  //   FirebaseMessaging.instance.requestPermission(
-  //     alert: true,
-  //     announcement: false,
-  //     badge: true,
-  //     carPlay: true,
-  //     criticalAlert: false,
-  //     provisional: true,
-  //     sound: true,
-  //   );
-  //   await FirebaseMessaging.instance
-  //       .setForegroundNotificationPresentationOptions(
-  //     alert: true, // Required to display a heads up notification
-  //     badge: true,
-  //     sound: true,
-  //   );
-  //   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-  //     // حنبقي نرجع نقول هنا حاجه البوشت الجاي خليك فاكر//
-  //   });
-  //
-  //   // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  //   // // ودي مهمه جدااااا
-  //   // @pragma('vm:entry-point')
-  //   // Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  //   // print('Message data: ${message.data}');
-  //   // }
-  //   // FirebaseMessaging.onMessageOpenedApp.listen(_firebaseMessageOpenAppHandler);
-  //   //
-  //   // @pragma('vm:entry-point')
-  //   // Future<void> _firebaseMessageOpenAppHandler(RemoteMessage message) async {
-  //   //   print('Handling click on message : ${message.messageId}');
-  //   //   // حننفذ هنا اللوجك الي عاوزين نعمله لو التطبيق كان مقفول ولما داس علي النوتيفيكيشن فتح التطبيق زي انا يروح لاسكرينه معينه وهكذا
-  //   // }
-  //
-  //
-  // }
 
 }

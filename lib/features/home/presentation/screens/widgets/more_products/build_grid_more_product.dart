@@ -36,15 +36,15 @@ class BuildGridMoreProducts extends StatelessWidget{
                       fontSize: 24,
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Directionality(
                     textDirection: TextDirection.ltr,
                     child: Container(
-                      width: 60,
-                      height: 30,
+                      width: 40,
+                      height: 40,
                       decoration: BoxDecoration(
                           color: AppColors.mainColor,
-                          borderRadius: BorderRadius.circular(20)
+                          borderRadius: BorderRadius.circular(50)
                       ),
                       child: Center(
                           child: IconButton(icon: Icon(

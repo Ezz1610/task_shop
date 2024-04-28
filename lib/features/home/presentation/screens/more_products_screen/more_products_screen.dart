@@ -51,21 +51,24 @@ class _MoreProductScreenState extends State<MoreProductScreen> {
       ),
       child: Scaffold(
           body:SafeArea(child: _apiRequestBuilder()) ,
-          bottomNavigationBar: SizedBox(
-            height: 60,
-            child: RequestBuilder<MoreProductsCubit>(
-              contentBuilder: (context,cubit){
-                if(cubit.state is PaginationLoadingState){
-                  dPrint("pagiiiiiiiiiiiiiiii111111111");
-                  return Center(child: CircularProgressIndicator(color: AppColors.mainColor,));
-                }else{
-                  dPrint("pagiiiiiiiiiiiiiiii22222222");
 
-                  return SizedBox.shrink();
-                }
+          bottomNavigationBar: SafeArea(
+            child: SizedBox(
+              height: 60,
+              child: RequestBuilder<MoreProductsCubit>(
+                contentBuilder: (context,cubit){
+                  if(cubit.state is PaginationLoadingState){
+                    dPrint("pagiiiiiiiiiiiiiiii111111111");
+                    return Center(child: CircularProgressIndicator(color: AppColors.mainColor,));
+                  }else{
+                    dPrint("pagiiiiiiiiiiiiiiii22222222");
 
-              },
-              retry: (context , cubit ) {  },
+                    return SizedBox.shrink();
+                  }
+
+                },
+                retry: (context , cubit ) {  },
+              ),
             ),
           ),
       ),
@@ -74,19 +77,26 @@ class _MoreProductScreenState extends State<MoreProductScreen> {
   _apiRequestBuilder() {
     return RequestBuilder<MoreProductsCubit>(
       contentBuilder: (context, cubit) {
-       return NotificationListener<ScrollNotification>(
-            onNotification: (notification){
-              if(notification.metrics.pixels==notification.metrics.maxScrollExtent&&
-              notification is ScrollUpdateNotification
-              ){
-                cubit.getMoreProductsData(
-                    fromPagination: true,
-                    authKey: _appPreferences.userDataInfo!.authKey,
-                    userId: _appPreferences.userDataInfo!.id);
-              }
-              return true;
-            },
-           child: BuildGridMoreProducts(moreProductsDM: cubit.products,));
+        if(cubit.state is GetMoreProductLoadingState){
+          dPrint("pagiiiiiiiiiiiiiiii111111111");
+          return Center(child: CircularProgressIndicator(color: AppColors.mainColor,));
+        }else{
+          dPrint("pagiiiiiiiiiiiiiiii22222222");
+
+          return NotificationListener<ScrollNotification>(
+              onNotification: (notification){
+                if(notification.metrics.pixels==notification.metrics.maxScrollExtent&&
+                    notification is ScrollUpdateNotification
+                ){
+                  cubit.getMoreProductsData(
+                      fromPagination: true,
+                      authKey: _appPreferences.userDataInfo!.authKey,
+                      userId: _appPreferences.userDataInfo!.id);
+                }
+                return true;
+              },
+              child: BuildGridMoreProducts(moreProductsDM: cubit.products,));
+        }
       },
       retry: (context, cubit) {},
       listener: (context, cubit) {
